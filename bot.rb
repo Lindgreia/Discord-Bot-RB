@@ -1,6 +1,6 @@
 require 'discordrb'
 
-bot = Discordrb::Commands::CommandBot.new token: 'OTM1OTQ0MDYwMTM5NjI2NTk3.YfF_1A.4XnkJsvABTMTVDymDKrXTgYxqnY', prefix: '!' 
+bot = Discordrb::Commands::CommandBot.new token: 'BOT_TOKEN_HERE', prefix: '!' 
 
 # done once, afterwards, you can remove this part if you want
 puts "This bot's invite URL is #{bot.invite_url}."
