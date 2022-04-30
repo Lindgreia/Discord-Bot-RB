@@ -1,6 +1,6 @@
 require 'discordrb'
 
-bot = Discordrb::Commands::CommandBot.new token: 'BOT_TOKEN_HERE', prefix: '!' 
+bot = Discordrb::Commands::CommandBot.new token: 'BOT_TOKEN_HERE', prefix: 'gem@'
 
 # done once, afterwards, you can remove this part if you want
 puts "This bot's invite URL is #{bot.invite_url}."
@@ -15,7 +15,7 @@ end
 
 bot.message(content: 'Hi') do |event|
     event.respond 'Hi'
-end 
+end
 
 
 #Mentionning the bot
@@ -28,8 +28,7 @@ bot.mention do |event|
 #Personal Effort
 
 bot.command(:help) do |event|
-  event.user.pm('Help *INCOMING*'
-  )
+  event.user.pm('Help *INCOMING*')
 end
 
 #SHutting down the bot
@@ -37,15 +36,15 @@ bot.command(:exit, help_available: false) do |event|
     # This is a check that only allows a user with a specific ID to execute this command. Otherwise, everyone would be
     # able to shut your bot down whenever they wanted.
     break unless event.user.id == 703997865982165442 # Replace number with your ID
-  
-    bot.send_message(event.channel.id, 'Bot is shutting down')
+
+    bot.send_message(event.channel.id, 'Bot is shutting down', even.author.mention)
     exit
   end
 
 
   bot.command(:eval, help_available: false) do |event, *code|
     break unless event.user.id == 703997865982165442 # Replace number with your ID
-  
+
     begin
       eval code.join(' ')
     rescue StandardError
@@ -61,17 +60,17 @@ bot.command(:exit, help_available: false) do |event|
     # The `voice_channel` method returns the voice channel the user is currently in, or `nil` if the user is not in a
     # voice channel.
     channel = event.user.voice_channel
-  
+
     # Here we return from the command unless the channel is not nil (i.e. the user is in a voice channel). The `next`
     # construct can be used to exit a command prematurely, and even send a message while we're at it.
     next "You're not in any voice channel!" unless channel
-  
+
     # The `voice_connect` method does everything necessary for the bot to connect to a voice channel. Afterwards the bot
     # will be connected and ready to play stuff back.
     bot.voice_connect(channel)
     "Connected to voice channel: #{channel.name}"
   end
-  
+
 
 
 
@@ -132,4 +131,4 @@ bot.message(content: '!time') do |event|
 end
 
 
-bot.run 
+bot.run
