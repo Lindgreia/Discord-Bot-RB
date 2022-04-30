@@ -72,30 +72,7 @@ bot.command(:exit, help_available: false) do |event|
     "Connected to voice channel: #{channel.name}"
   end
   
-  # A simple command that plays back an mp3 file.
-  bot.command(:play_mp3) do |event|
-    # `event.voice` is a helper method that gets the correct voice bot on the server the bot is currently in. Since a
-    # bot may be connected to more than one voice channel (never more than one on the same server, though), this is
-    # necessary to allow the differentiation of servers.
-    #
-    # It returns a `VoiceBot` object that methods such as `play_file` can be called on.
-    voice_bot = event.voice
-    voice_bot.play_file('/home/lindgrei/Downloads/avenged_sevenfold_save_me_lyrics_70925768186194354.mp3')
-  end
-  
-  # DCA is a custom audio format developed by a couple people from the Discord API community (including myself, meew0).
-  # It represents the audio data exactly as Discord wants it in a format that is very simple to parse, so libraries can
-  # very easily add support for it. It has the advantage that absolutely no transcoding has to be done, so it is very
-  # light on CPU in comparison to `play_file`.
-  #
-  # A conversion utility that converts existing audio files to DCA can be found here: https://github.com/RaymondSchnyder/dca-rs
-  bot.command(:play_dca) do |event|
-    voice_bot = event.voice
-  
-    # Since the DCA format is non-standard (i.e. ffmpeg doesn't support it), a separate method other than `play_file` has
-    # to be used to play DCA files back. `play_dca` fulfills that role.
-    voice_bot.play_dca('data/music.dca')
-  end
+
 
 
 #GUESS NUMBER
@@ -133,13 +110,6 @@ bot.message(start_with: '!game') do |event|
   event.respond "My number was: `#{magic}`."
 end
 
-# Above we used the provided User#await! method to easily set up
-# an await for a follow-up message from a user.
-# We can also manually register an await for specific kinds of events.
-# Here, we'll write a command that shows the current time and allows
-# the user to delete the message with a reaction.
-# We'll be using Bot#add_await! to do this:
-# https://www.rubydoc.info/gems/discordrb/Discordrb%2FBot:add_await!
 
 # the unicode ":x:" emoji
 CROSS_MARK = "\u274c"
